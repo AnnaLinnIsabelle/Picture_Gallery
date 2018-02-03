@@ -1,14 +1,14 @@
 // Your scripts goes here...
 const cygniGallery = (function() {
 
-    let flickr_url;
     window.handleFlickrPhotoSearch = handleFlickrPhotoSearch;
     window.handleFlickrSizes = handleFlickrSizes;
+    let show_err_mess = false;
 
     function init() {
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Taking off... 🚀');
-            flickr_url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&" +
+            let flickr_url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&" +
                 "api_key=27cfab5e654f8de0d4f0c85859984b5b&per_page=10&format=json" +
                 "&jsoncallback=handleFlickrPhotoSearch&text=elephant&per_page=40";
             let script = document.createElement( "script" );
@@ -19,10 +19,15 @@ const cygniGallery = (function() {
 
 
     }
+
     function handleFlickrPhotoSearch(rsp) {
         if (rsp.stat === 'fail'){
-            //handle err
-            console.log('fail');
+                // display error message to user
+                let load_mess_div = document.getElementById('loading-mess-div');
+                let err_mess = document.createElement('p');
+                err_mess.className ="error-message";
+                err_mess.innerHTML = "I'm sorry, there was a problem searching for elephants from flickr: " + rsp.message;
+                load_mess_div.appendChild(err_mess);
         }
         let load_mess_div = document.getElementById('loading-mess-div');
         let load_mess = document.getElementById('loading-mess');
@@ -39,20 +44,28 @@ const cygniGallery = (function() {
     }
 
     function handleFlickrSizes(rsp) {
-        if (rsp.stat === 'fail'){
-            // handle err
-            console.log('fail');
+        if (rsp.stat === 'fail') {
+            if (!show_err_mess) {
+                // display error message to user
+                let load_mess_div = document.getElementById('loading-mess-div');
+                let err_mess = document.createElement('p');
+                err_mess.className ="error-message";
+                err_mess.innerHTML = "I'm sorry, there was a problem with retrieving photo sizes from flickr: " + rsp.message;
+                load_mess_div.appendChild(err_mess);
+                show_err_mess = true;
+            }
+
         } else {
             let sizes = rsp.sizes.size;
             let photo_data = {thumb: '', orig: ''};
-            sizes.forEach(function (res_size) {
+            for (let res_size of sizes) {
                 if (res_size.label == 'Thumbnail') {
                     photo_data.thumb = res_size.source;
                 }
                 if (res_size.label == 'Original') {
                     photo_data.orig = res_size.source;
                 }
-            });
+            };
             document.getElementById('gallery-div').appendChild(createFlickrThumb(photo_data));
         }
     }
@@ -62,9 +75,6 @@ const cygniGallery = (function() {
     function createFlickrThumb(photoData) {
         let col = document.createElement('div');
         col.className = "col-m-3 col-2 square-m-3 square-2";
-
-        // let thumb = document.createElement('div');
-        // thumb.className = "thumbnail";
 
         let link = document.createElement('a');
         link.setAttribute('href', photoData.orig);

@@ -28,7 +28,7 @@
   .square-m-3 {height: 25vw;}
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 767px) {
   /* For desktop: */
   .col-1 {width: 8.33%;}
   .col-2 {width: 16.66%;}
@@ -76,5 +76,14 @@
     padding: 10%;
     background-color: #fdfdfd;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.error-message {
+  color: #a70000;
+  font-family: "Lucida Console";
+  font-size: 20px;
+  border: 2px solid #a70000;
+  border-radius: 5px;
+  padding: 4%;
 }
 
