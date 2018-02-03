@@ -59,7 +59,7 @@ const cygniGallery = (function() {
             let sizes = rsp.sizes.size;
             let photo_data = {thumb: '', orig: ''};
             for (let res_size of sizes) {
-                if (res_size.label == 'Thumbnail') {
+                if (res_size.label == 'Small') {
                     photo_data.thumb = res_size.source;
                 }
                 if (res_size.label == 'Original') {
@@ -74,7 +74,7 @@ const cygniGallery = (function() {
 
     function createFlickrThumb(photoData) {
         let col = document.createElement('div');
-        col.className = "col-m-3 col-2 square-m-3 square-2";
+        col.className = "col-m-6 col-4 square-m-6 square-4";
 
         let link = document.createElement('a');
         link.setAttribute('href', photoData.orig);

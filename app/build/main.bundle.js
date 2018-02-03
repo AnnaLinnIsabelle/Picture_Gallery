@@ -83,7 +83,7 @@ var cygniGallery = function () {
                 for (var _iterator2 = sizes[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                     var res_size = _step2.value;
 
-                    if (res_size.label == 'Thumbnail') {
+                    if (res_size.label == 'Small') {
                         photo_data.thumb = res_size.source;
                     }
                     if (res_size.label == 'Original') {
@@ -112,7 +112,7 @@ var cygniGallery = function () {
 
     function createFlickrThumb(photoData) {
         var col = document.createElement('div');
-        col.className = "col-m-3 col-2 square-m-3 square-2";
+        col.className = "col-m-6 col-4 square-m-6 square-4";
 
         var link = document.createElement('a');
         link.setAttribute('href', photoData.orig);
