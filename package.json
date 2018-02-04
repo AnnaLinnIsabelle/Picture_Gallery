@@ -17,6 +17,7 @@
     "server:livereload": "livereload ./app",
     "server:serve": "http-server ./app -p 8080",
     "babel": "babel --presets es2015 app/js/main.js -o app/build/main.bundle.js",
+    "prestart": "npm install && npm run babel",
     "start": "npm-run-all --parallel server:*"
   },
   "devDependencies": {
