@@ -1,12 +1,12 @@
 'use strict';
 
-// Your scripts goes here...
 var cygniGallery = function () {
 
     window.handleFlickrPhotoSearch = handleFlickrPhotoSearch;
     window.handleFlickrSizes = handleFlickrSizes;
     var show_err_mess = false;
 
+    /** Initialize the application by retreiving pictures from Flickr */
     function init() {
         document.addEventListener('DOMContentLoaded', function () {
             console.log('Taking off... 🚀');
@@ -18,6 +18,7 @@ var cygniGallery = function () {
         });
     }
 
+    /** Handle respons from Flickr API Photo search*/
     function handleFlickrPhotoSearch(rsp) {
         if (rsp.stat === 'fail') {
             // display error message to user
@@ -61,6 +62,7 @@ var cygniGallery = function () {
         }
     }
 
+    /** Handle respons from Flickr API size of photo search*/
     function handleFlickrSizes(rsp) {
         if (rsp.stat === 'fail') {
             if (!show_err_mess) {
@@ -105,11 +107,11 @@ var cygniGallery = function () {
                 }
             }
 
-            ;
             document.getElementById('gallery-div').appendChild(createFlickrThumb(photo_data));
         }
     }
 
+    /** Create a small clickable "thumbnail" of a photo as html element*/
     function createFlickrThumb(photoData) {
         var col = document.createElement('div');
         col.className = "col-m-6 col-4 square-m-6 square-4";

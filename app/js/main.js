@@ -1,10 +1,10 @@
-// Your scripts goes here...
 const cygniGallery = (function() {
 
     window.handleFlickrPhotoSearch = handleFlickrPhotoSearch;
     window.handleFlickrSizes = handleFlickrSizes;
     let show_err_mess = false;
 
+    /** Initialize the application by retreiving pictures from Flickr */
     function init() {
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Taking off... 🚀');
@@ -17,9 +17,9 @@ const cygniGallery = (function() {
             document.body.appendChild( script );
         });
 
-
     }
 
+    /** Handle respons from Flickr API Photo search*/
     function handleFlickrPhotoSearch(rsp) {
         if (rsp.stat === 'fail'){
                 // display error message to user
@@ -43,6 +43,7 @@ const cygniGallery = (function() {
         }
     }
 
+    /** Handle respons from Flickr API size of photo search*/
     function handleFlickrSizes(rsp) {
         if (rsp.stat === 'fail') {
             if (!show_err_mess) {
@@ -54,7 +55,6 @@ const cygniGallery = (function() {
                 load_mess_div.appendChild(err_mess);
                 show_err_mess = true;
             }
-
         } else {
             let sizes = rsp.sizes.size;
             let photo_data = {thumb: '', orig: ''};
@@ -65,13 +65,12 @@ const cygniGallery = (function() {
                 if (res_size.label == 'Original') {
                     photo_data.orig = res_size.source;
                 }
-            };
+            }
             document.getElementById('gallery-div').appendChild(createFlickrThumb(photo_data));
         }
     }
 
-
-
+    /** Create a small clickable "thumbnail" of a photo as html element*/
     function createFlickrThumb(photoData) {
         let col = document.createElement('div');
         col.className = "col-m-6 col-4 square-m-6 square-4";

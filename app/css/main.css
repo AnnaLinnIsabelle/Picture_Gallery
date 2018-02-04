@@ -1,3 +1,5 @@
+/* *************** Responsive style **************** */
+
 * {
   box-sizing: border-box;
 }
@@ -58,8 +60,9 @@
   display: table;
 }
 
+/* *************** App style **************** */
+
 .🐹 {
-  /*padding: 44px;*/
   background: aliceblue;
   color: #444;
   text-align: center;
@@ -71,7 +74,6 @@
 }
 
 .thumbnail {
-    /*border: solid #444 1px;*/
     border-radius: 5px;
     padding: 10%;
     background-color: #fdfdfd;
